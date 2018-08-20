@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const routers = require('./routers')
 
@@ -15,6 +16,7 @@ db.once('open', function () {
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(cors())
 
 app.use('/', routers)
 
