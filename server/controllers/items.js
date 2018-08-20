@@ -2,13 +2,14 @@ const Item = require('../models/item')
 
 module.exports = {
   search: (req, res, next) => {
-    const { name, price_start, tag } = req.query
+    let param_name = req.query.name || ''
+    let param_price = req.query.price_start || 0
+    let param_tag = req.query.tag || ''
+
     Item.find({
-      // $or: [
-      //   { name: { $regex: new RegExp(`(?=.*${name})(?!.*help)(.+)`, "i") } },
-      //   { price_start: price_start || 0 },
-      //   { tags: { $in: tags } }
-      // ]
+      name: { $regex: new RegExp(`(?=.*${param_name})(?!.*help)(.+)`, "i") },
+      price: { $gt: param_price },
+      tags: { $regex: new RegExp(`(?=.*${param_tag})(?!.*help)(.+)`, "i") }
     })
       .then(items => {
         res.status(200).json(items)
