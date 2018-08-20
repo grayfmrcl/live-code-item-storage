@@ -29,7 +29,7 @@ Vue.component('search-item', {
     searchItem() {
       let self = this
       let param_name = `${this.input_name.trim().length > 0 ? `name=${this.input_name.trim()}` : ''}`
-      let param_price = `${this.input_price > 0 ? `price=${this.input_price}` : ''}`
+      let param_price = `${this.input_price > 0 ? `price_start=${this.input_price}` : ''}`
       let param_tags = `${this.input_tags.trim().length > 0 ? `tags=${this.input_tags.trim()}` : ''}`
 
       axios.get(`http://localhost:3000/?${param_name || param_price || param_tags}`)
